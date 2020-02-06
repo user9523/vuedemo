@@ -1,0 +1,42 @@
+{
+  "svn.delete.ignoredRulesForDeletedFiles": [],
+  "vetur.format.defaultFormatter.html": "js-beautify-html",
+  "vetur.format.defaultFormatterOptions": {
+    "prettyhtml": {
+      "printWidth": 175,
+      "singleQuote": false, //双引号
+      "wrapAttributes": false, //属性不分行
+      "sortAttributes": false
+    }
+  },
+  "vetur.format.options.tabSize": 2,
+  "vetur.format.defaultFormatter.css": "prettier",
+  "vetur.format.defaultFormatter.postcss": "prettier",
+  "vetur.format.defaultFormatter.scss": "prettier",
+  "vetur.format.defaultFormatter.less": "prettier",
+  "vetur.format.defaultFormatter.stylus": "stylus-supremacy",
+  "vetur.format.defaultFormatter.js": "vscode-typescript",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": false,
+  "eslint.validate": ["javascript", "javascriptreact", "vue-html", "vue"],
+  "eslint.run": "onSave",
+  "editor.wordWrapColumn": 175,
+  "editor.formatOnSave": true,
+  // "terminal.integrated.shell.windows": "E:\\Program Files\\Git\\bin\\bash.exe",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  //powser mode
+  "powermode.enabled": true,
+  //样式
+  "powermode.presets": "particles",
+  // 时间间隔
+  "powermode.comboTimeout": 8,
+  // 抖动
+  "powermode.enableShake": false,
+  "powermode.backgroundMode": "mask"
+}

@@ -28,7 +28,10 @@ export default {
     };
   },
   mounted() {
-    this.$on("validate", this.validate);
+    // this.$on("validate", this.validate); 这里有点不好
+    this.$on("validate", () => {
+      this.validate();
+    });
   },
   methods: {
     validate() {

@@ -1,14 +1,22 @@
 <template>
-  
+  <div id="app">
+  <tab></tab>
+    <!-- <mian></mian> -->
+  </div> 
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Tab from './custom/tab/tab.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Tab
   }
 }
+
 </script>
+
+<style type="module" scoped>
+
+</style>

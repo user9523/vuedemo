@@ -11,16 +11,17 @@ const store = createStore({
     },
     mutations: {
         // 更新
-       update(state,){
-
+       update(state,changename){
+        const {key,value} = changename
+        if(key = 'navname') state.navName = value
        }
-      }
     }
 })
  
  
-const app = createApp({ /* your root component */ })
+export default store
+// const app = createApp({ /* your root component */ })
  
  
-// 通过 use 注册插件
-app.use(store)
+// // 通过 use 注册插件
+// app.use(store)

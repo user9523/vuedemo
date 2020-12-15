@@ -10,10 +10,14 @@ const store = createStore({
         catalogue: null
     },
     mutations: {
-        // 更新
+        // 更新网页标题
        update(state,changename){
         const {key,value} = changename
-        if(key = 'navname') state.navName = value
+        if(key === 'navname') state.navName = value
+        else if(key === 'catalogue'){
+            const catalogue = state.catalogue
+            let length1 = catalogue.length
+        }
        }
     }
 })

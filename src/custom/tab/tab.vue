@@ -65,6 +65,6 @@ export default {
     text-align: center;
 }
 .tab-icon{
-   padding-right: 20px;
+   padding-right: 42px;
 }
 </style>

@@ -99,11 +99,34 @@ const store = createStore({
                     URLS: []
                 })
                 updatelocal(store)
-                break;
             }
-            // else if (key == '2'){
-
-            // }
+            // 添加网址 
+            else if (key == '2'){
+                let id = value.whichTag
+                for (let i = 0; i < length1; i++) {
+                    let currennt = catalogue[i]
+                    if(id == currennt.id){
+                       let URLS = currennt.URLS
+                       let length2 = URLS.length
+                       let trueId
+                       if (length2 == 0) {
+                           trueId = `${id}.1`
+                       }else{
+                        let lastId = URLS[length2 - 1].id.split('.')
+                            lastId[1] = (+lastId[1] + 1).toString()
+                            trueId = lastId.join('.')
+                       }
+                       URLS.push({
+                        id: trueId,
+                        url: value.url,
+                        icon: value.icon,
+                        name: value.name
+                       })
+                       updatelocal(store)
+                       break
+                    } 
+                }
+            }
         }
     }
     // modules: {

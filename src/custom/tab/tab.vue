@@ -16,6 +16,17 @@
               <i class="fas fa-cog tab-icon"></i>
               <span>导入配置</span>
           </li>
+          <br>
+          <li class="tab" v-for="(item,index) in navInfos.catalogue" :key="index" @click="toID(item.id)">
+             <span class="li-container">
+                  <i :class="['fas', `fa-${item.icon}`, 'tab-icon']" />
+                  <span>{{ item.name }}</span>
+                  <i class="fas fa-angle-right tab-icon tab-angle-right"/>
+              </span>
+          </li>
+          <li class="tab">
+              <i class="fas fa-plus"></i>
+          </li>
       </ul>
   </aside>
 </template>
@@ -27,11 +38,11 @@ import {useStore} from 'vuex'
 export default {
     name: "tab",
     setup () {
-     const store = useStore() 
-     const navInfos = {navName : 'homeURL',catalogue:'catalogue'}
-      return {
+     let store = useStore() 
+     let  navInfos = store.state // Vuex的state对象
+     console.log(navInfos)
+      return { 
             navInfos,
-          
         }
     }
    
@@ -66,5 +77,10 @@ export default {
 }
 .tab-icon{
    padding-right: 42px;
+}
+.li-container{
+    display: inline-block;
+    width: 100%;
+    padding-left: 90px;
 }
 </style>

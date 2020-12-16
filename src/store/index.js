@@ -46,7 +46,65 @@ const store = createStore({
         }
        },
        // 移除(根据id来移除)
+       remove(state,playlod){
+            const catalogue = state.catalogue
+            let length1 = catalogue.length
+            let iid = playlod.split('.') 
+            for (let i = 0; i < length1; i++) {
+                const currennt = catalogue[i]
+                if(currennt.id === iid[0]){
+                    // 删除标签内以及所有网址
+                    catalogue.splice(i,1)
+                    updatelocal(store)
+                    break;
+                } else {
+                  // 删除标签内的某个网址  
+                  let URLS = currennt.URLS
+                  let length2 = URLS.length
+                  for (let j = 0; j < length2; j++) {
+                      let URL = URLS[j]
+                      if(URL.id === playlod){
+                          URLS.splice(j,1)
+                          updatelocal(store)
+                          break;
+                      }
+                      
+                  }
+                }
+                
+            }
+        },
+        //添加
+        /**
+         * store.commit('add', {
+            key: '2',
+            value: {
+                name: state.name,
+                icon: state.icon,
+                url: state.url,
+                whichTag: state.whichTag
+            }
+         */
+        add(state,playlod){
+            let{key,value} = playlod
+            const catalogue = state.catalogue
+            let length1 = catalogue.length
+            // 添加标签
+            if(key == '1'){
+                let _id = length1 == 0 ? '1' : (+catalogue[length1 - 1].id +1).toString
+                catalogue.push({
+                    id: _id,
+                    name: value.name,
+                    icon: value.icon,
+                    URLS: []
+                })
+                updatelocal(store)
+                break;
+            }
+            // else if (key == '2'){
 
+            // }
+        }
     }
     // modules: {
     //     moduleTab,

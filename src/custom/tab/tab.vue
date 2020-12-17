@@ -5,23 +5,29 @@
       </div>
       <ul id="tabs">
           <li class="tab" @click="ShowSearch">
+            <span class="li-container">
              <i class="fas fa-search tab-icon"/>
               <span>快速搜索</span>
+            </span>
           </li>
           <li class="tab tab-save" @click="showSaveConfigAlert">
+            <span class="li-container">
               <i class="fas fa-share-square tab-icon"></i>
               <span>保存配置</span>
+            </span>
           </li>
           <li class="tab tab-import" @click="showImportConfigAlert">
+            <span class="li-container">
               <i class="fas fa-cog tab-icon"></i>
               <span>导入配置</span>
+            </span>
           </li>
           <br>
           <li class="tab" v-for="(item,index) in navInfos.catalogue" :key="index" @click="toID(item.id)">
              <span class="li-container">
-                  <i :class="['fas', `fa-${item.icon}`, 'tab-icon']" />
-                  <span>{{ item.name }}</span>
-                  <i class="fas fa-angle-right tab-icon tab-angle-right"/>
+                <i :class="['fas', `fa-${item.icon}`, 'tab-icon']" />
+                <span>{{ item.name }}</span>
+                <i class="fas fa-angle-right tab-icon tab-angle-right"/>
               </span>
           </li>
           <li class="tab">
@@ -66,6 +72,7 @@ export default {
         height: 100px;
         line-height: 100px;
         font-size: 30px;
+        background: rgb(76, 154, 243);
     }
     #tabs::-webkit-scrollbar{
     display: none;
@@ -85,6 +92,11 @@ export default {
 .li-container{
     display: inline-block;
     width: 100%;
-    padding-left: 90px;
+}
+.tab-angle-right{
+     position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 0;
 }
 </style>

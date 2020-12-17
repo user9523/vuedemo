@@ -128,12 +128,12 @@ const store = createStore({
                 }
             }
         }
+    },
+    modules: {
+        // moduleTab,
+        // moduleUrl,
+        moduleSearch
     }
-    // modules: {
-    //     moduleTab,
-    //     moduleUrl,
-    //     moduleSearch
-    // }
 })
  
  

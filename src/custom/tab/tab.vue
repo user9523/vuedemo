@@ -4,7 +4,7 @@
          {{ navInfos.navName }}
       </div>
       <ul id="tabs">
-          <li class="tab">
+          <li class="tab" @click="ShowSearch">
              <i class="fas fa-search tab-icon"/>
               <span>快速搜索</span>
           </li>
@@ -41,8 +41,12 @@ export default {
      let store = useStore() 
      let  navInfos = store.state // Vuex的state对象
      console.log(navInfos)
+     function ShowSearch(){
+         console.log('111')
+     }
       return { 
             navInfos,
+            ShowSearch
         }
     }
    

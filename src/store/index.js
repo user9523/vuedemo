@@ -1,6 +1,7 @@
 
 import { createStore } from 'vuex'
 import { updatelocal } from '../utils/utils'
+import moduleSearch from './module/moduleSearch'
  
  
 // 创建 store 容器实例.

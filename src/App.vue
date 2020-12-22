@@ -1,30 +1,35 @@
 <template>
   <div id="app">
   <tab></tab>
-    <!-- <mian></mian> -->
+  <mian></mian>
   </div> 
 </template>
 
 <script>
 import Tab from './custom/tab/tab.vue'
+import Mian from './custom/mian/mian.vue'
 import {useStore} from 'vuex'
 import {updateTovuex} from './utils/utils'
 
 export default {
   name: 'App',
   components: {
-    Tab
+    Tab,
+    Mian
   },
   setup(){
     // 自执行
     (function setInfos(){
+      console.log(window.localStorage.navInfos)
+      // 清空缓存
+      // localStorage.clear()
       const store = useStore()
       if(window.localStorage.isSet === 'true'){
         updateTovuex(store,JSON.parse(window.localStorage.navInfos))
       }         // 自动设置默认信息
         else {
             let obj = {
-            navName: "MY HOME",
+            navName: "SEO",
             catalogue : [
                 {id:'1' , name: "常用网站", icon: "align-justify", URLS: [
                   {id:'1.1' , url: 'http://www.baidu.com', icon: 'http://www.baidu.com/favicon.ico', name: '百度'},
@@ -40,13 +45,6 @@ export default {
             writeToVuex(store, obj)
         }
     })()
-    // if(){
-
-    // }
-    // // 默认导航信息（首页）
-    // else{
-
-    // }
     return{
     }
   }

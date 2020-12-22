@@ -1,7 +1,8 @@
 <template>
   <aside id="wapper">
       <div id="codename">
-         {{ navInfos.navName }}
+         <img class="imgclass" src="../../assets/img/logo.jpg" alt="logo">
+         <span style="margin-left:20px"> {{ navInfos.navName }}</span>
       </div>
       <ul id="tabs">
           <li class="tab" @click="ShowSearch">
@@ -46,9 +47,16 @@ export default {
     setup () {
      let store = useStore() 
      let  navInfos = store.state // Vuex的state对象
+     console.log('接收的对象')
      console.log(navInfos)
+     // 展开搜索框
      function ShowSearch(){
-         console.log('111')
+         if(store.state.moduleSearch.isSearch){
+             store.commit('changesearchWord',false)
+             store.commit('changesearchWord', '')
+         } else {
+             store.commit('changeIsSearch',true)
+         }
      }
       return { 
             navInfos,
@@ -61,7 +69,7 @@ export default {
 
 <style scoped>
     #wapper{
-      width: 250px;
+    width: 250px;
     height: 100vh;
     float: left;
     background-color: rgb(44, 42, 42);
@@ -73,6 +81,9 @@ export default {
         line-height: 100px;
         font-size: 30px;
         background: rgb(76, 154, 243);
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     #tabs::-webkit-scrollbar{
     display: none;
@@ -98,5 +109,9 @@ export default {
     top: 50%;
     transform: translate(0, -50%);
     right: 0;
+}
+.imgclass{
+    width: 80px;
+    height: 80px;
 }
 </style>

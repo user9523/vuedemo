@@ -3,17 +3,20 @@
    <div id="notice">
         <i class="fas fa-bell"></i>
         <top/>
-        <!-- <search></search> -->
+        <search></search>
     </div>
  </div>
 </template>
 
 <script>
-// import Top  from './components/carousel'
+import top from  './components/top.vue'
+import search from './components/search.vue'
+
 export default {
-  // components:{
-  //   Top
-  // },
+  components:{
+    top,
+    search
+  },
   setup() {
     return {
     }

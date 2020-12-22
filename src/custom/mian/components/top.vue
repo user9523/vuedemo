@@ -1,5 +1,5 @@
 <template>
-   <span>仅供学习使用</span>
+   <span style="margin-left:30px;">仅供学习使用</span>
 </template>
 
 <script>

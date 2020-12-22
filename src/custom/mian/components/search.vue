@@ -16,7 +16,11 @@
 export default {
     components: {},
         setup() {
+          const  moduleSearch = {
+              isSearch : true
+          }
           return{
+              moduleSearch
         }
     }
 }

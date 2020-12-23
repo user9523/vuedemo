@@ -5,16 +5,17 @@
             {'animate__bounceInDown': moduleSearch.isSearch}, 
             {'animate__fadeOutUpBig': !moduleSearch.isSearch}]"
         >
-        <div class="input">
-            <div class="off" @click="offclick()">关闭</div>
-        </div>
+        <lpinput></lpinput>
+        <div class="input" @click="offclick()">关闭</div>
     </div>
 </template>
 
 <script>
-
+import lpinput from '../../../components/lpsearch.vue'
 export default {
-    components: {},
+    components: {
+        lpinput
+    },
         setup() {
           const  moduleSearch = {
               isSearch : true
@@ -30,7 +31,7 @@ export default {
     position: absolute;
     bottom: -65px;
     left: 50%;
-    width: 350px;
+    /* width: 350px; */
     height: 50px;
     line-height: 0;
     transform: translate(-50%, 0);
@@ -38,22 +39,14 @@ export default {
 }
 .input{
     margin: 0;
-    width: 300px;
+    width: 100px;
     display: inline-block;
-    height: 50px;
-    position: relative;
-}
-.inputstyle{
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-}
-.off{
-    display: inline-block;
-    height: 50px;
+   height: 50px;
     width: 50px;
-    text-align: right;
+    position: relative;
+    text-align: center;
     line-height: 50px;
     color: rgb(194, 184, 184);
+    background: rgb(6, 199, 233);
 }
 </style>

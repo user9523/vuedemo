@@ -95,5 +95,21 @@ setup(props,context) {
         width: 100%;
         height: 100%;
         padding-left: 20px;
+        box-sizing: border-box;
     }
+    .isshoes{
+        cursor: auto;
+        box-shadow: 0 0 6px #53aee3;
+    }
+    .clear::before{
+    content: '\2716';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-100%, -50%);
+    cursor: pointer;
+    height: 50px;
+    line-height: 50px;
+    color: #666;
+}
 </style>

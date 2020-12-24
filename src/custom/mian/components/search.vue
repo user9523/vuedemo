@@ -40,9 +40,11 @@ export default {
     line-height: 0;
     transform: translate(-50%, 0);
     z-index: 998;
+    box-sizing: border-box;
 }
 .input{
     margin: 0;
+    border: 0;
     width: 100px;
     display: inline-block;
    height: 50px;
@@ -52,5 +54,6 @@ export default {
     line-height: 50px;
     color: rgb(194, 184, 184);
     background: rgb(6, 199, 233);
+    border-radius: 0px 25px 25px 0px;
 }
 </style>

@@ -75,6 +75,9 @@ There are still some imperfect functions that will be completed one after anothe
 Welcome everyone to give me more advice
 欢迎大家给我多提提意见
 
-# 仅用于克隆学习使用
+###  仅用于克隆学习使用
 
 Only used for clone learning
+
+### 技术栈 ： vite + vue3.0
+

@@ -20,8 +20,12 @@ export default {
           const  moduleSearch = {
               isSearch : true
           }
+         function  offclick() {
+              console.log('555')
+          }
           return{
-              moduleSearch
+              moduleSearch,
+              offclick
         }
     }
 }

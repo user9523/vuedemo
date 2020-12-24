@@ -33,6 +33,14 @@ props:{
         type: String,
     }
 },
+/**
+ * 对于 setup 函数来说，它接收两个参数，分别为：
+ * props:  通过 prop 传递过来的所有数据，我们都可以在这里进行接收。并且获取到的数据将保持响应性。
+ * context: context 是一个 JavaScript 对象，这个对象暴露了三个组件的属性 context <=>  { attrs, slots, emit } 可以解构出来使用
+ * attrs : 它是绑定到组件中的 非 props 数据，并且是非响应式的。
+ * slots : 是组件的插槽，同样也不是 响应式的。
+ * emit : 是一个方法，相当于 vue2 中的 this.$emit 方法。 
+ */
 setup(props,context) {
     // 简单地把 ref(obj) 理解为这个样子 reactive({value: obj})
     let isok = ref(false)  // 判断是否聚焦

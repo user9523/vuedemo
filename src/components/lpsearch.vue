@@ -89,6 +89,7 @@ setup(props,context) {
         position: relative;
         height: 50px;
         width: 400px;
+        border: 1px solid #ccc;
         display: inline-block;
     }
     .inputstyle{

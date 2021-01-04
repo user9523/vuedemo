@@ -2,6 +2,7 @@
 import { createStore } from 'vuex'
 import { updatelocal } from '../utils/utils'
 import moduleSearch from './module/moduleSearch'
+import moduleUrl from './module/url'
  
  
 // 创建 store 容器实例.
@@ -19,16 +20,16 @@ const store = createStore({
             const catalogue = state.catalogue
             let length1 = catalogue.length
             for (let i = 0; i < length1; i++) {
-                let currennt  = catalogue[i]
-                if(currennt.id == value.id.split('.')[0]){
+                let current  = catalogue[i]
+                if(current.id == value.id.split('.')[0]){
                     // 修改的是标签信息
-                    if(currennt.id == value.id){
-                        currennt.name = value.name
-                        currennt.icon = value.icon
+                    if(current.id == value.id){
+                        current.name = value.name
+                        current.icon = value.icon
                         updatelocal(store)
                     } else {
-                        let URLS =  currennt.URLS
-                        let length2 = currennt.length
+                        let URLS =  current.URLS
+                        let length2 = current.length
                         for (let j = 0; j < length2; j++) {
                             const URL = URLS[j];
                             if(URL.id == value.id){
@@ -52,15 +53,15 @@ const store = createStore({
             let length1 = catalogue.length
             let iid = playlod.split('.') 
             for (let i = 0; i < length1; i++) {
-                const currennt = catalogue[i]
-                if(currennt.id === iid[0]){
+                const current = catalogue[i]
+                if(current.id === iid[0]){
                     // 删除标签内以及所有网址
                     catalogue.splice(i,1)
                     updatelocal(store)
                     break;
                 } else {
                   // 删除标签内的某个网址  
-                  let URLS = currennt.URLS
+                  let URLS = current.URLS
                   let length2 = URLS.length
                   for (let j = 0; j < length2; j++) {
                       let URL = URLS[j]
@@ -105,9 +106,9 @@ const store = createStore({
             else if (key == '2'){
                 let id = value.whichTag
                 for (let i = 0; i < length1; i++) {
-                    let currennt = catalogue[i]
-                    if(id == currennt.id){
-                       let URLS = currennt.URLS
+                    let current = catalogue[i]
+                    if(id == current.id){
+                       let URLS = current.URLS
                        let length2 = URLS.length
                        let trueId
                        if (length2 == 0) {
@@ -132,15 +133,10 @@ const store = createStore({
     },
     modules: {
         // moduleTab,
-        // moduleUrl,
+        moduleUrl,
         moduleSearch
     }
 })
  
  
 export default store
-// const app = createApp({ /* your root component */ })
- 
- 
-// // 通过 use 注册插件
-// app.use(store)

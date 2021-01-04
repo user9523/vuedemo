@@ -35,14 +35,19 @@
               <i class="fas fa-edit edit-icon" @click="editUrl(urls)"/>
             </span>
           </li>
+           <li class="li-box add-more" @click="addMoreUrl(tab.id)">
+                <i class="fas fa-plus"/>
+            </li>
         </ul>
       </div>
+      <urlAlert/>
     </div>
  </div>
 </template>
 
 <script>
 import {useStore} from 'vuex'
+import {ref} from 'vue'
 import top from  './components/top.vue'
 import search from './components/search.vue'
 import urlAlert from '../../components/urlAlert.vue'
@@ -50,14 +55,35 @@ import urlAlert from '../../components/urlAlert.vue'
 export default {
   components:{
     top,
-    search
+    search,
+    urlAlert
   },
   setup() {
     const store = useStore()
+    const editWhich = ref(-1)
     let list = store.state.catalogue
     console.log(list)
+    // 进入编辑状态
+    function enterEdit(id) {
+        if(id != editWhich.value) {
+            editWhich.value = id
+        } else {
+            editWhich.value = -1
+        }     
+    }
+    // 添加添加URL的框
+    function addMoreUrl(id){
+          store.commit('changeUrlInfo', [
+                {key: 'isShow', value: true},
+                {key: 'whichTag', value: id},
+                {key: 'alertType', value: '新增网址'}
+            ])
+    }
     return {
-      list
+      list,
+      addMoreUrl,
+      enterEdit,
+      editWhich
     }
   }
 }
@@ -89,6 +115,17 @@ export default {
     line-height: 60px;
     color: #837c7c;
     position: relative;
+}
+.edit-tab-name{
+     display: inline-block;
+    width: 55px;
+    height: 20.8px;
+    line-height: 20.8px;
+    color: #eee;
+    display: none;
+}
+.tabIsEdit{
+    display: inline-block;
 }
 .tab-icon{
     margin: 0 10px 0 30px;
@@ -177,6 +214,9 @@ export default {
 .edit-icon:hover, .delete-icon:hover{
     color: rgb(194, 96, 4);
 }
+.each-content:hover .edit{
+    display: inline-block;
+}
 .edit{
     position: absolute;
     right: 20px;
@@ -185,9 +225,18 @@ export default {
     color: rgb(172, 161, 161);
     font-size: .8em;
     cursor: pointer;
-    /* display: none; */
+    display: none;
+}
+.edit:hover{
+    color: #666;
 }
 .isEdit{
     display: block;
+}
+.add-more{
+    text-align: center;
+    line-height: 150px;
+    color: #e1e1e1;
+    font-size: 1.5em;
 }
 </style>

@@ -5,27 +5,41 @@
             {'animate__bounceInDown': moduleSearch.isSearch}, 
             {'animate__fadeOutUpBig': !moduleSearch.isSearch}]"
         >
-        <lpinput></lpinput>
-        <div class="input" @click="offclick()">关闭</div>
+       <lp-input class="search-input" 
+                  placeholder="输入搜索关键词"
+                  :value="moduleSearch.searchWord"
+                  @_input="input"/>
+        <div class="close-search">
+            <span class="close-search-txt" @click="offclick">关闭</span>
+        </div>
     </div>
 </template>
 
 <script>
+import {useStore} from 'vuex'
+import {reactive} from 'vue'
 import lpinput from '../../../components/lpsearch.vue'
 export default {
     components: {
         lpinput
     },
         setup() {
-          const  moduleSearch = {
-              isSearch : true
+          const store = useStore()
+          const  moduleSearch = store.state.moduleSearch
+          // 
+          function input(){
+             store.commit('changeSearchWord', value)
           }
-         function  offclick() {
-              console.log('555')
-          }
+        // 关闭
+        function offclick() {
+            store.commit('changeIsSearch', false)
+            store.commit('changeSearchWord', '')
+        }
           return{
+              store,
               moduleSearch,
-              offclick
+              offclick,
+              input
         }
     }
 }
@@ -55,5 +69,21 @@ export default {
     color: rgb(194, 184, 184);
     background: rgb(6, 199, 233);
     border-radius: 0px 25px 25px 0px;
+}
+.search-input{
+    margin: 0;
+    width: 300px;
+    display: inline-block;
+}
+.close-search{
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    text-align: right;
+    line-height: 50px;
+    color: rgb(194, 184, 184);
+}
+.close-search-txt{
+    cursor: pointer;
 }
 </style>

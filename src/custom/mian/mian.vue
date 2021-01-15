@@ -79,11 +79,15 @@ export default {
                 {key: 'alertType', value: '新增网址'}
             ])
     }
+    function editUrl(){
+
+    }
     return {
       list,
       addMoreUrl,
       enterEdit,
-      editWhich
+      editWhich,
+      editUrl
     }
   }
 }

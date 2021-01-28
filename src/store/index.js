@@ -2,7 +2,7 @@
 import { createStore } from 'vuex'
 import { updatelocal } from '../utils/utils'
 import moduleSearch from './module/moduleSearch'
-import moduleUrl from './module/url'
+import moduleUrl from './module/url.js'
  
  
 // 创建 store 容器实例.
@@ -49,6 +49,7 @@ const store = createStore({
        },
        // 移除(根据id来移除)
        remove(state,playlod){
+           debugger
             const catalogue = state.catalogue
             let length1 = catalogue.length
             let iid = playlod.split('.') 
@@ -56,24 +57,25 @@ const store = createStore({
                 const current = catalogue[i]
                 if(current.id === iid[0]){
                     // 删除标签内以及所有网址
-                    catalogue.splice(i,1)
-                    updatelocal(store)
-                    break;
-                } else {
-                  // 删除标签内的某个网址  
-                  let URLS = current.URLS
-                  let length2 = URLS.length
-                  for (let j = 0; j < length2; j++) {
-                      let URL = URLS[j]
-                      if(URL.id === playlod){
-                          URLS.splice(j,1)
-                          updatelocal(store)
-                          break;
+                    if(iid.length === 1){
+                        catalogue.splice(i,1)
+                        updatelocal(store)
+                        break;
+                     }   // 删除标签内的某个网址   
+                     else {
+                        let URLS = current.URLS
+                        let length2 = URLS.length
+                        for (let j = 0; j < length2; j++) {
+                            let URL = URLS[j]
+                            if(URL.id === playlod){
+                                URLS.splice(j,1)
+                                updatelocal(store)
+                                break;
+                            }
+                            
+                        }
                       }
-                      
-                  }
-                }
-                
+                 }  
             }
         },
         //添加

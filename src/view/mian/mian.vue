@@ -31,7 +31,7 @@
               <span class="url-name">{{ urls.name }}</span>
             </a>
             <span :class="['edit-container', {'urlIsEdit': tab.id == editWhich}]">
-              <i class="fas fa-trash-alt delete-icon" @click="deleteUrl(urls.id)"/>
+              <i class="fas fa-trash-alt delete-icon" @click="deleteUrl(urls,urls.id)"/>
               <i class="fas fa-edit edit-icon" @click="editUrl(urls)"/>
             </span>
           </li>
@@ -47,10 +47,10 @@
 
 <script>
 import {useStore} from 'vuex'
-import {ref} from 'vue'
+import {ref,inject} from 'vue'
 import top from  './components/top.vue'
 import search from './components/search.vue'
-import urlAlert from '../../components/urlAlert.vue'
+import urlAlert from '../../components/urlAlert/urlAlert.vue'
 
 export default {
   components:{
@@ -62,6 +62,7 @@ export default {
     const store = useStore()
     const editWhich = ref(-1)
     let list = store.state.catalogue
+    const $confirm = inject('confirm')
     console.log(list)
     // 进入编辑状态
     function enterEdit(id) {
@@ -82,12 +83,43 @@ export default {
     function editUrl(){
 
     }
+    // 删除单个网址
+    function deleteUrl(list,id){
+        console.log(list)
+        $confirm({
+                content: '确定删除该网址吗？'
+            })
+        .then(() => {
+            store.commit('remove', id)
+            $message({
+                type: 'success',
+                content: '网址删除成功'
+            })
+        })
+        .catch(() => {})      
+    }
+        // 删除标签以及标签下的所有网址
+        function deleteTag(id) {
+            $confirm({
+                content: '确定删除该标签以及该标签下所有网址吗？'
+            })
+            .then(() => {
+                store.commit('remove', id)
+                $message({
+                    type: 'success',
+                    content: '标签页及子网址删除成功'
+                })
+            })
+            .catch(() => {})
+        }
     return {
       list,
       addMoreUrl,
       enterEdit,
       editWhich,
-      editUrl
+      editUrl,
+      deleteUrl,
+      deleteTag
     }
   }
 }

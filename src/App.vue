@@ -6,10 +6,14 @@
 </template>
 
 <script>
-import Tab from './custom/tab/tab.vue'
-import Mian from './custom/mian/mian.vue'
+import Tab from './view/tab/tab.vue'
+import Mian from './view/mian/mian.vue'
 import {useStore} from 'vuex'
 import {updateTovuex} from './utils/utils'
+import {createMessage} from './components/lp-message/lp-message.js'
+import {createDialog } from './components/lp-dialog/lp-dialog.js'
+import {provide }from 'vue'
+
 
 export default {
   name: 'App',
@@ -45,6 +49,9 @@ export default {
             writeToVuex(store, obj)
         }
     })()
+    // 全局注册组件
+    provide('message', createMessage)
+    provide('confirm', createDialog)
     return{
     }
   }

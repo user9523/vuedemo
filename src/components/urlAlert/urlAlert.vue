@@ -2,7 +2,7 @@
    <div class='box' v-show="state.isShow">>
        <div class="urlalert">
        <div class="top">
-           <span>新增网址</span>
+           <span>{{ state.alertType }}</span>
            <span class="close-url-alert" @click="cancel"/>
        </div>
        <div class="cennter">
@@ -55,7 +55,6 @@ setup() {
         }
                 // 确认添加URL 或 确认修改URL
         function confirm() {
-            debugger
             if(state.url == '') {
                 $message({
                     type: 'warning',

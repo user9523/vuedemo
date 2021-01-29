@@ -3,6 +3,8 @@ import { createStore } from 'vuex'
 import { updatelocal } from '../utils/utils'
 import moduleSearch from './module/moduleSearch'
 import moduleUrl from './module/url.js'
+import moduleTab from './module/tab.js'
+
  
  
 // 创建 store 容器实例.
@@ -15,7 +17,7 @@ const store = createStore({
         // 更新网页标题
        update(state,changename){
         const {key,value} = changename
-        if(key === 'navname') state.navName = value
+        if(key === 'navName') state.navName = value
         else if(key === 'catalogue'){
             const catalogue = state.catalogue
             let length1 = catalogue.length
@@ -49,7 +51,6 @@ const store = createStore({
        },
        // 移除(根据id来移除)
        remove(state,playlod){
-           debugger
             const catalogue = state.catalogue
             let length1 = catalogue.length
             let iid = playlod.split('.') 
@@ -96,6 +97,9 @@ const store = createStore({
             // 添加标签
             if(key == '1'){
                 let _id = length1 == 0 ? '1' : (+catalogue[length1 - 1].id +1).toString
+                if (value.icon) {
+                    value.icon = require('../assets/img/01.jpg')
+                }
                 catalogue.push({
                     id: _id,
                     name: value.name,
@@ -120,6 +124,9 @@ const store = createStore({
                             lastId[1] = (+lastId[1] + 1).toString()
                             trueId = lastId.join('.')
                        }
+                       if (value.icon) {
+                        value.icon = require('../assets/img/01.jpg')
+                       }
                        URLS.push({
                         id: trueId,
                         url: value.url,
@@ -134,7 +141,7 @@ const store = createStore({
         }
     },
     modules: {
-        // moduleTab,
+        moduleTab,
         moduleUrl,
         moduleSearch
     }

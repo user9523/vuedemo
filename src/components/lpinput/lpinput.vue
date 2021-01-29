@@ -35,7 +35,6 @@ export default {
 setup(prpos, context) {
     let isFocus = ref(false)
     let isVirtual = ref(false)
-
     // 聚焦事件
     function inputFocus(){
         isFocus.value = true

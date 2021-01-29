@@ -5,7 +5,7 @@
         <top/>
         <search></search>
     </div>
-    <div class="content">
+    <div id="content">
       <div v-for="(tab,index) in list" :key="index" class="each-content">
         <div :id="tab.id" class="tab-title">
             <i :class="['fas', `fa-${tab.icon}`, 'tab-icon']"/>
@@ -20,12 +20,13 @@
                   @click="enterEdit(tab.id)">
                   {{ tab.id == editWhich? '退出' : '编辑' }}
             </span>
+            <tagAlert name="修改标签"></tagAlert>
         </div>
         <ul class="url-box">
           <li class="li-box" v-for="(urls,index) in tab.URLS" :key="index">
             <a :href="urls.url" target="_blank" class="url-link">
               <div class="round-box">
-                  <img :src="urls.icon" :alt="urls.name" class="url-icon" @load="imgLoadSuccess" @error="imgLoadErr">
+                  <img :src="urls.icon" :alt="`${urls.name && urls.icon ? urls.name : ''}`" class="url-icon" @load="imgLoadSuccess" @error="imgLoadErr">
                   <svg t="1604809784875" class="icon url-icon err-url-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2514" width="80%" height="80%"><path d="M511.58 513.75m-415.89 0a415.89 415.89 0 1 0 831.78 0 415.89 415.89 0 1 0-831.78 0Z" fill="#353F51" p-id="2515"></path><path d="M511.58 173.48c187.63 0 340.27 152.64 340.27 340.27S699.21 854.02 511.58 854.02 171.31 701.38 171.31 513.75s152.65-340.27 340.27-340.27m0-75.61C281.9 97.87 95.7 284.07 95.7 513.75s186.2 415.89 415.89 415.89 415.89-186.2 415.89-415.89S741.27 97.87 511.58 97.87z" fill="#70798B" p-id="2516"></path><path d="M511.58 173.48c52.68 0 132.33 135.71 132.33 340.27s-79.65 340.27-132.33 340.27-132.32-135.71-132.32-340.27 79.64-340.27 132.32-340.27m0-75.61c-114.84 0-207.94 186.2-207.94 415.89s93.1 415.89 207.94 415.89 207.94-186.2 207.94-415.89S626.43 97.87 511.58 97.87z" fill="#70798B" p-id="2517"></path><path d="M133.51 362.52h756.16v75.62H133.51zM133.51 589.37h756.16v75.62H133.51z" fill="#70798B" p-id="2518"></path></svg>  
               </div>
               <span class="url-name">{{ urls.name }}</span>
@@ -51,18 +52,22 @@ import {ref,inject} from 'vue'
 import top from  './components/top.vue'
 import search from './components/search.vue'
 import urlAlert from '../../components/urlAlert/urlAlert.vue'
+import tagAlert from '../../components/tabAlert/tabAlert.vue'
 
 export default {
   components:{
     top,
     search,
-    urlAlert
+    urlAlert,
+    tagAlert
   },
   setup() {
     const store = useStore()
+    const moduleUrl = store.state.moduleUrl
     const editWhich = ref(-1)
     let list = store.state.catalogue
     const $confirm = inject('confirm')
+    console.log('list')
     console.log(list)
     // 进入编辑状态
     function enterEdit(id) {
@@ -80,9 +85,29 @@ export default {
                 {key: 'alertType', value: '新增网址'}
             ])
     }
-    function editUrl(){
-
+    // 弹出修改URL的弹框
+    function editUrl(url) {
+        store.commit('changeUrlInfo', [
+            {key: 'url', value: url.url},
+            {key: 'icon', value: url.icon},
+            {key: 'id', value: url.id},
+            {key: 'name', value: url.name},
+            {key: 'isShow', value: true},
+            {key: 'alertType', value: '修改网址'}
+        ])
     }
+    // 修改标签弹框弹出
+        function editTagAlertShow(tab) {
+            store.commit('changeTabInfo', [
+                {key: 'isShowAddTabAlert', value: true},
+                {key: 'tagName', value: tab.name},
+                {key: 'trueIcon', value: tab.icon},
+                {key: 'isSelected', value: true},
+                {key: 'currentIcon', value: tab.icon},
+                {key: 'id', value: tab.id},
+                {key: 'alertType', value: '修改标签'}
+            ])
+        }
     // 删除单个网址
     function deleteUrl(list,id){
         console.log(list)
@@ -118,6 +143,7 @@ export default {
       enterEdit,
       editWhich,
       editUrl,
+      editTagAlertShow,
       deleteUrl,
       deleteTag
     }
